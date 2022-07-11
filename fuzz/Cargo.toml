@@ -1,0 +1,31 @@
+[package]
+name = "rustpython-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+
+[dependencies.rustpython]
+path = ".."
+features = ["freeze-stdlib", "jit"]
+
+[dependencies.rustpython-vm]
+path = "../vm"
+
+# Prevent this from interfering with workspaces
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "vm"
+path = "fuzz_targets/vm.rs"
+test = false
+doc = false
+
+[profile.release]
+debug = true
