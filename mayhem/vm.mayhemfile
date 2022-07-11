@@ -1,0 +1,7 @@
+project: rustpython
+target: vm
+
+cmds:
+  - cmd: /vm -- -detect_leaks=0
+  - cmd: /vm_no_inst @@ -- -detect_leaks=0
+    libfuzzer: false
